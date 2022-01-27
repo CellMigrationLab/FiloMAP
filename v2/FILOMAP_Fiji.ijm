@@ -112,7 +112,7 @@ if (channels>=4) {
 
 // Create a Merged image and save it
 if (channels==2) {
-	run("Merge Channels...", "c1=image-0001 c2=image-0003 keep");}
+	run("Merge Channels...", "c1=image-0001 c2=image-0002 keep");}
 if (channels==3) {
 	run("Merge Channels...", "c1=image-0001 c2=image-0003 c6=image-0002 keep");}
 if (channels==4) {
