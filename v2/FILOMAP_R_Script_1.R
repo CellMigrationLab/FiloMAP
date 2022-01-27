@@ -52,7 +52,7 @@ for (fileName in fileNames) {
   dp <- tapply(as.list(Values), gl(ncol(Values)/2, 2), as.data.frame)
   i =1
   repeat {
-    write.csv(dp[[i]], file=paste(DIROUT_single_IN,p,"_", i, ".csv", sep=""), row.names = F)
+    write.csv(dp[[i]], file=file.path(DIROUT_single_IN, paste(p,"_", i, ".csv", sep="")), row.names = F)
     i = i +1
     if (i == Nbvalues) {
       break
@@ -148,13 +148,15 @@ colnames(singleValues) <- c("X","Y")   # Rename the result table
   Result <- cbind(Result, "ID"=1:nrow(Result))          # Add a extra row to the table
   colnames(Result) <- c("Distance","Intensity", "ID")   # Rename the result table
   Result <- Result[c("ID", "Distance", "Intensity")]    # reorganize the column name
-  write.csv(Result, file=paste(DIROUT_single_OUT, p, "_out.csv", sep=""), row.names = F)
+
+  write.csv(Result, file=file.path(DIROUT_single_OUT, paste(p, "_out.csv", sep="")), row.names = F)
  
   #Create a new table without distance
   temp_res = Result
   temp_res$Distance <- NULL
   colnames(temp_res) <- c("ID", p)                      # Rename the result table
-  write.csv(temp_res, file=paste(DIROUT_temp, p, "_temp.csv", sep=""), row.names = F)
+  
+  write.csv(temp_res, file=file.path(DIROUT_temp, paste(p, "_temp.csv", sep="")), row.names = F)
  
   
   #Plot Original data
@@ -170,7 +172,8 @@ colnames(singleValues) <- c("X","Y")   # Rename the result table
  
   hm.palette <- colorRampPalette(rev(brewer.pal(11, 'Spectral')), space='Lab')  
   heatmap  <- ggplot(Result, aes(x = ID, y = 1, fill = Intensity))   + geom_tile()   +  coord_equal()    +   scale_fill_gradientn(colours = hm.palette(100))    + ylab(NULL)   + theme_minimal() + theme(axis.text.y = element_blank())
-  pdf(file=paste(DIROUT_single_OUT, p, "_out.pdf"))
+
+  pdf(file=file.path(DIROUT_single_OUT, paste(p, "_out.pdf", sep="")))
   Figure  <- multiplot(raw_data, tfrm_data, heatmap, col = 1)
   dev.off()
     } 
@@ -179,14 +182,15 @@ colnames(singleValues) <- c("X","Y")   # Rename the result table
 
 # Merge all the data ##########################
 mymergeddata = multmerge(DIROUT_temp)
-write.csv(mymergeddata, file=paste(DIROUT_merge, protein, "merge.csv", sep=""), row.names = F) # save the table full of merge data
+
+
+write.csv(mymergeddata, file=file.path(DIROUT_merge, paste(protein, "merge.csv", sep="")), row.names = F) # save the table full of merge data
 
 FilopodiaLength$Y <- NULL
 FilopodiaLength <- FilopodiaLength[-c(1), ]
 names(FilopodiaLength)[1] <- 'Filopodia_Length'
 
-
-write.csv(FilopodiaLength, file=paste(DIROUT_merge, protein, "_FilopodiaLength.csv", sep=""), row.names = F) # save the filopodia length
+write.csv(FilopodiaLength, file=file.path(DIROUT_merge, paste(protein, "_FilopodiaLength.csv", sep="")), row.names = F) # save the filopodia length
 
 
 # Calculate Mean, SD, count and SEM
@@ -194,7 +198,8 @@ Data_mean <- data.frame(ID=mymergeddata[,1], Means=rowMeans(mymergeddata[,-1],  
 Data_mean <- transform(Data_mean, SD=rowSds(as.matrix(mymergeddata[,-1]), na.rm=TRUE))
 Data_mean <- transform(Data_mean, Count=ncol(mymergeddata[,-1]))
 Data_mean <- transform(Data_mean, SEM= SD/sqrt(Count))
-write.csv(Data_mean, file=paste(DIROUT_merge, protein, "summary.csv", sep=""), row.names = F) # save the summary table 
+
+write.csv(Data_mean, file=file.path(DIROUT_merge, paste(protein, "summary.csv", sep="")), row.names = F) # save the summary table 
 
 #Plot the summary data
 pd <- position_dodge(0.1) # move them .05 to the left and right
@@ -209,7 +214,8 @@ longData <- melt(map)
 mergeplot <- ggplot(longData, aes(x = Var1, y = Var2, fill = value)) + geom_tile()   +  coord_equal()    +   scale_fill_gradientn(colours = hm.palette(100)) + ylab(NULL)   + theme(axis.line=element_blank(),axis.text.x=element_blank(), axis.text.y=element_blank(), axis.ticks=element_blank(), axis.title.x=element_blank(), axis.title.y=element_blank(),legend.position="none", panel.background=element_blank(), panel.border=element_blank(), panel.grid.major=element_blank(), panel.grid.minor=element_blank(),plot.background=element_blank()) 
 
 #Plot all diagrams as figure
-pdf(file=paste(DIROUT_merge, protein, "_summary.pdf"))
+
+pdf(file=file.path(DIROUT_merge, paste(protein, "_summary.pdf", sep="")))
 Figure2  <- multiplot(Mean_plot, heatmap2, mergeplot, col = 1)
 
 if (!as.integer(Nbvalues) == Nbvalues) {stop(fileName, " has an unexpected number of column, please check the file")}

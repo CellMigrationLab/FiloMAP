@@ -64,7 +64,8 @@ longData <- melt(map)
 figure <- ggplot(longData, aes(x = Var1, y = Var2, fill = value)) + geom_tile()   +  coord_equal()    +   scale_fill_gradientn(colours = hm.palette(100), limits=c(0,Max_value), na.value="#9e0142") + ylab(NULL)   + theme_minimal()
 
 #Plot all diagrams as figure
-pdf(file=paste(path, "_Map.pdf"))
+
+pdf(file=file.path(DIR, paste("Map.pdf", sep="")))
 figure2 <- multiplot(figure, col = 1)
 
 dev.off()
