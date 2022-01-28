@@ -1,6 +1,6 @@
 # FiloMAP
 
-**This version of FiloMap is deprecated but archived here as it was used in the following publication:
+**This version of FiloMap is deprecated but archived here as it was used in the following publication:**
 
 Jacquemet G, Stubb A, Saup R, Miihkinen M, Kremneva E, Hamidi H, Ivaska J. Filopodome Mapping Identifies p130Cas as a Mechanosensitive Regulator of Filopodia Stability. Curr Biol. 2019 Jan 21;29(2):202-216.e7. doi: 10.1016/j.cub.2018.11.053. Epub 2019 Jan 10. PMID: 30639111; PMCID: PMC6345628.
 
