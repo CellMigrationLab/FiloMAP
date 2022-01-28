@@ -9,5 +9,7 @@ The line intensity profiles were compiled and analysed in R (FILOMAP_R_Script_1.
 
 FILOMAP_R_Script_2.R allows the generation of the filopodia maps as heatmaps using R.
 
+A test dataset is available on [Zenodo](https://zenodo.org/record/5912949).
+
 
 
