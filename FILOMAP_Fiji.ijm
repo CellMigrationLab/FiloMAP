@@ -144,7 +144,7 @@ Plot.showValues();
 saveAs("Results", LineProf_results_directory_C1+file_shortname[p]+" - 001.csv");
 selectWindow("Profiles"); close();
 run("Clear Results");
-selectWindow("image-0001"); saveAs("Tiff",Contrast_adjusted+file_shortname[p]+" - 0002.tif"); 
+selectWindow("image-0001"); saveAs("Tiff",Contrast_adjusted+file_shortname[p]+" - 0001.tif"); 
 
 if (channels>=2) {
 selectWindow("image-0002");
