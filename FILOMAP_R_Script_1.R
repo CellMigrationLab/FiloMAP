@@ -57,6 +57,9 @@ for (fileName in fileNames) {
     if (i == Nbvalues) {
       break
     }
+    if (i > Nbvalues) {
+      break
+    }
   }
   
 }
